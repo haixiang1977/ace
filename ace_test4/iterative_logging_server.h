@@ -1,5 +1,6 @@
 #include "ace/FILE_IO.h"
 #include "ace/INET_Addr.h"
+#include "ace/Log_Msg.h"
 #include "logging_server.h"
 #include "logging_handler.h"
 
