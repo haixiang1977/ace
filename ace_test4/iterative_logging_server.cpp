@@ -1,7 +1,7 @@
 #include "ace/Log_Msg.h"
 #include "iterative_logging_server.h"
 
-virtual int Iterative_Logging_Server::open (u_short port) {
+int Iterative_Logging_Server::open (u_short port) {
 	if (make_log_file (log_file_) == -1) {
 		ACE_ERROR_RETURN ((LM_ERROR, "%p\n", "make_log_file()"), -1);
 	}
@@ -9,7 +9,7 @@ virtual int Iterative_Logging_Server::open (u_short port) {
 	return Logging_Server::open(port);
 }
 
-virtual int Iterative_Logging_Server::handle_connection() {
+int Iterative_Logging_Server::handle_connection() {
 	ACE_INET_Addr logging_peer_addr;
 
 	if (acceptor().accept(logging_handler_.peer(), &logging_peer_addr) == -1) {
@@ -20,7 +20,7 @@ virtual int Iterative_Logging_Server::handle_connection() {
 	return 0;
 }
 
-virtual int Iterative_Logging_Server::handle_data (ACE_SOCK_Stream *) {
+int Iterative_Logging_Server::handle_data (ACE_SOCK_Stream *) {
 	while (logging_handler_.log_record() != -1) {
 		continue;
 	}

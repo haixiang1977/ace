@@ -28,6 +28,6 @@ public:
 private:
 	//Socket acceptor
 	ACE_SOCK_Acceptor acceptor_;
-}
+};
 #endif /* _LOGGING_SERVER_H */
 
