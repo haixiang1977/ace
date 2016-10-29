@@ -23,10 +23,7 @@ int Logging_Server::open(u_short logger_port) {
 	ACE_INET_Addr server_addr;
 	int result;
 
-	if (logger_port != 0)
-		result = server_addr.set (logger_port, INADDR_ANY);
-	else
-		result = server_addr.set("ace_logger", INADDR_ANY);
+	result = server_addr.set (logger_port, INADDR_ANY);
 
 	if (result == -1) return -1;
 

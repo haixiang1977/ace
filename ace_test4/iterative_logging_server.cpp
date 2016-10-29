@@ -2,9 +2,12 @@
 #include "iterative_logging_server.h"
 
 int Iterative_Logging_Server::open (u_short port) {
+	if (port == 0) port = 5555;
+
 	if (make_log_file (log_file_) == -1) {
 		ACE_ERROR_RETURN ((LM_ERROR, "%p\n", "make_log_file()"), -1);
 	}
+	ACE_DEBUG((LM_DEBUG, "port %d opened\n", port));
 
 	return Logging_Server::open(port);
 }
@@ -34,6 +37,7 @@ int main(int argc, char *argv[])
 {
 	Iterative_Logging_Server server;
 
+	ACE_DEBUG((LM_DEBUG, "Iterative logging server running\n"));
 	if (server.run (argc, argv) == -1) {
 		ACE_ERROR_RETURN ((LM_ERROR, "%p\n", "server.run()"), -1);
 	}
