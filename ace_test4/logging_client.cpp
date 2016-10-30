@@ -19,11 +19,17 @@ private:
 int Logging_Client::send (const ACE_Log_Record &log_record) {
 	const ACE_TCHAR *buf;
 	size_t len;
+	size_t bytestransferred;
+
+	int result;
 
 	buf = log_record.msg_data();
 	len = log_record.length();
 
-	return logging_peer_.send(buf, len); /* buffer point and lenght */
+	result = logging_peer_.send_n(buf, len, 0, &bytestransferred); /* buffer point and length */
+	ACE_DEBUG((LM_DEBUG, "bytestransferred %d bytes\n", bytestransferred));
+
+	return result;
 }
 
 int main (int argc, char *argv[])
@@ -60,5 +66,6 @@ int main (int argc, char *argv[])
 			ACE_ERROR_RETURN ((LM_ERROR, "%p\n", "logging_client.send()"), -1);
 		}
 	}
+
 	return 0;
 }
