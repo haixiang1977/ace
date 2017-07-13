@@ -22,6 +22,7 @@ int Client::svc(void)
     ACE_SOCK_Connector connector;
 
     if (connector.connect(stream, addr) < 0) {
+        ACE_DEBUG((LM_DEBUG, ACE_TEXT("(%t)Failed to Connect to Server\n")));
         return -1;
     }
 
