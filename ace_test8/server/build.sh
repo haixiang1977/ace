@@ -1,0 +1,1 @@
+g++ -g ACE_Server.cpp Server.cpp Request_Handler.cpp Task_Manager.cpp Task_Worker.cpp -lACE -ldl -lrt -lpthread -o ace_server.out -I/home/developer/ace_src/ACE_wrappers/tmp/include/ -L/home/developer/ace_src/ACE_wrappers/tmp/lib
