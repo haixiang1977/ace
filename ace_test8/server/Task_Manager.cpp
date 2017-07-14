@@ -16,7 +16,7 @@ int Task_Manager::svc(void)
     while(1) {
         ACE_Message_Block *mb = NULL;
         if (this->getq(mb) < 0) {
-            task_tp.msg_queue()->decative();
+            task_tp.msg_queue()->deactivate();
             task_tp.wait(); // block until there are no more threads running in this task
         } else {
             task_tp.putq(mb);

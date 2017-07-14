@@ -1,5 +1,5 @@
 #ifndef __TASK_MANAGER_H_
-#define __TASK_MANAGER_H
+#define __TASK_MANAGER_H_
 
 #include "ace/Task.h"
 #include "ace/Synch.h"

@@ -23,7 +23,9 @@ int Task_Worker::svc(void)
 
 void Task_Worker::process_task(ACE_Message_Block *mb)
 {
-    ACE_DEBUG((LM_DEBUG, ACE_TEXT("Process Task: %s length %d"), mb->rd_ptr(), mb->length()));
+    ACE_DEBUG((LM_DEBUG, ACE_TEXT("Process Task: %s length %d\n"), mb->rd_ptr(), mb->length()));
+    //ACE_OS::sleep(3);
+
     mb->release();
 
     return;

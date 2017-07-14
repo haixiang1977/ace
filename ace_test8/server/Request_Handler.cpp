@@ -3,7 +3,7 @@
 #include "ace/Thread_Manager.h"
 #include "ace/Svc_Handler.h"
 #include "ace/SOCK_Stream.h"
-#include "ace/Sync.h"
+#include "ace/Synch.h"
 #include "ace/Reactor.h"
 
 #include "Request_Handler.h"
@@ -15,7 +15,7 @@ namespace ACE_Server
 
 Task_Manager Request_Handler::task_mgr;
 
-Request_Handler::Request_Handler(ACE_Thread_Manager *thr_mgr) : ACE_Svc_Handler<ACE_SOCK_STREAM, ACE_MT_SYNCH>
+Request_Handler::Request_Handler(ACE_Thread_Manager *thr_mgr) : ACE_Svc_Handler<ACE_SOCK_STREAM, ACE_MT_SYNCH> (thr_mgr)
 {
     this->reactor(ACE_Reactor::instance());
     task_mgr.activate(); // activate worker process
@@ -29,7 +29,7 @@ int Request_Handler::handle_input(ACE_HANDLE fd) // event handler
         size_t msg_len;
 
         for (int i = 0; i < 4; i++) {
-            msg_len |= (size_t)length[i] < (8 * i);
+            msg_len |= (size_t)length[i] << (8 * i);
         }
 
         char msg[BUFFER_SIZE] = {0};
@@ -39,6 +39,7 @@ int Request_Handler::handle_input(ACE_HANDLE fd) // event handler
             ACE_NEW_RETURN(mb, ACE_Message_Block(msg_len, ACE_Message_Block::MB_DATA, 0, msg), -1);
 
             mb->wr_ptr(msg_len);
+            ACE_DEBUG((LM_DEBUG, ACE_TEXT("handle input: %s length %d\n"), mb->rd_ptr(), mb->length()));
 
             task_mgr.putq(mb); // half-sync, put message to worker thread
 

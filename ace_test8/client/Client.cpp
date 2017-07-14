@@ -33,7 +33,7 @@ int Client::svc(void)
             break;
         }
 
-        ACE_DEBUG((LM_DEBUG, ACE_TEXT("(%t)Sending %s\n"), &(mb->rd_ptr()[4])));
+        ACE_DEBUG((LM_DEBUG, ACE_TEXT("Sending %s\n"), &(mb->rd_ptr()[4])));
 
         stream.send_n(mb->rd_ptr(), mb->length());
         mb->release();
@@ -41,6 +41,7 @@ int Client::svc(void)
         ACE_OS::sleep(TIME_INTERVAL);
     }
 
+    // close down the socket
     stream.close();
 
     return 0;

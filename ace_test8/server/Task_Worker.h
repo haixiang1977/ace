@@ -2,7 +2,7 @@
 #define __TASK_WORKER_H_
 
 #include "ace/Task.h"
-#include "ace/SYnch.h"
+#include "ace/Synch.h"
 #include "ace/Message_Block.h"
 
 namespace ACE_Server

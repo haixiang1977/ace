@@ -3,7 +3,7 @@
 
 #include "ace/Svc_Handler.h"
 #include "ace/SOCK_Stream.h"
-#include "ace/Sync.h"
+#include "ace/Synch.h"
 #include "ace/Thread_Manager.h"
 
 #include "Task_Manager.h"
